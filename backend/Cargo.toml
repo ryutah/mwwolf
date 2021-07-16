@@ -1,0 +1,14 @@
+[workspace]
+
+members = [
+  "crates/v1/domain",
+  "crates/v1/usecase",
+  "crates/v1/presentation/graphql",
+  "crates/v1/infrastructure",
+  "crates/v1/application/cloudrun",
+  "crates/v1/libmww",
+  "crates/v1/application/local",
+  "crates/v1/application/generate_graphql_schema",
+  "crates/v1/di",
+  "crates/v1/testmww",
+]

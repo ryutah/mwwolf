@@ -1,0 +1,9 @@
+ここにCommitの見出しを書いてください
+ 例: 仕様変更のためmodelを変更した
+ここにCommit内容の詳細を書いてください主に変更を行った理由など
+ 例: 顧客の要望によりmodelAとmodelBを修正した
+  それにともないテストコードも修正した
+
+
+issue NOをrefsかcloseを選択してください
+refs #$issue_no

@@ -1,0 +1,19 @@
+[package]
+name = "di"
+version = "0.1.0"
+authors = ["ryutah <6662577+ryutah@users.noreply.github.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+usecase = { path = "../usecase" }
+infrastructure = { path = "../infrastructure" }
+domain = { path = "../domain" }
+async-graphql = { git = "https://github.com/async-graphql/async-graphql.git", branch = "actix-web-v4-beta" }
+futures-channel = { version = "0.3.5", default-features = false, features = ["sink", "alloc", "std"] }
+async-std = { version = "1.9.0", features = ["attributes", "tokio1"] }
+
+[features]
+local = []
+cloudrun = []

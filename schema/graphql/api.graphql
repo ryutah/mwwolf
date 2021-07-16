@@ -1,0 +1,14 @@
+type Query {
+	project(id: String!): Project!
+}
+type Project {
+	id: String!
+	name: String!
+}
+type Mutation {
+	createProject(name: String!): Project!
+}
+schema {
+	query: Query
+	mutation: Mutation
+}

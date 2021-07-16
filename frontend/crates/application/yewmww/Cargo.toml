@@ -1,0 +1,20 @@
+[package]
+name = "yewmww"
+version = "0.1.0"
+authors = ["qwerty2501 <939468+qwerty2501@users.noreply.github.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+yew = "0.18.0"
+graphql_api_client = { path = "../../api_client/graphql_api_client" }
+graphql_client = { version = "0.9.0", features = ["web"] }
+serde = { version = "1.0.126", features = ["derive"] }
+yewtil = { version = "0.4.0", features = ["future"] }
+getrandom = { version = "0.2.3", features = ["js"] }
+surf = { version = "2.2.0", default-features = false, features = ["wasm-client"] }
+
+[dev-dependencies]
+wasm-bindgen = "0.2.74"
+wasm-bindgen-test = "0.3.24"

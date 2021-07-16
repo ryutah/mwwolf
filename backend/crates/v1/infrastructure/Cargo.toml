@@ -1,0 +1,32 @@
+[package]
+name = "infrastructure"
+version = "0.1.0"
+authors = ["ryutah <6662577+ryutah@users.noreply.github.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+derive-new = "0.5.9"
+domain = { path = "../domain" }
+libmww = { path = "../libmww" }
+async-std = { version = "1.9.0", features = ["attributes", "tokio1"] }
+async-trait = "0.1.50"
+downcast-rs = "1.2.0"
+uuid = { version = "0.8", features = ["v4"] }
+tonic = { version = "0.4.3", features = ["tls", "prost"] }
+prost = "0.7.0"
+prost-types = "0.7.0"
+anyhow = "1.0.41"
+thiserror = "1.0.25"
+serde = { version = "1.0.126", features = ["derive"] }
+json = { package = "serde_json", version = "1.0.64" }
+jwt = { package = "jsonwebtoken", version = "7.2.0" }
+http = "0.2.4"
+hyper = "0.14.9"
+hyper-rustls = "0.22.1"
+chrono = "0.4.19"
+bytes = "1.0.1"
+
+[build-dependencies]
+tonic-build = "0.4.2"

@@ -1,0 +1,18 @@
+[package]
+name = "graphql"
+version = "0.1.0"
+authors = ["ryutah <6662577+ryutah@users.noreply.github.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+di = { path = "../../di" }
+async-graphql = { git = "https://github.com/async-graphql/async-graphql.git", branch = "actix-web-v4-beta" }
+async-graphql-actix-web = { git = "https://github.com/async-graphql/async-graphql.git", branch = "actix-web-v4-beta" }
+actix-web = "4.0.0-beta.8"
+actix-rt = "2.2.0"
+derive-new = "0.5.9"
+usecase = { path = "../../usecase" }
+domain = { path = "../../domain" }
+infrastructure = { path = "../../infrastructure" }

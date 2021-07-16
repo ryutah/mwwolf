@@ -1,0 +1,4 @@
+{
+	"*.{json,yaml,md,html}": "npm run fix:prettier",
+	"*.rs": "scripts/git/hooks/pre-commit/fmt_rust.sh"
+}

@@ -1,0 +1,13 @@
+[package]
+name = "generate_graphql_schema"
+version = "0.1.0"
+authors = ["qwerty2501 <939468+qwerty2501@users.noreply.github.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+graphql = { path = "../../presentation/graphql" }
+di = { path = "../../di", features = ["local"] }
+async-graphql = { git = "https://github.com/async-graphql/async-graphql.git", branch = "actix-web-v4-beta" }
+clap = "3.0.0-beta.2"

@@ -1,0 +1,36 @@
+name: CARRIAGE
+on: [push]
+jobs:
+  rust-lint:
+    runs-on: ubuntu-latest
+    container:
+      image: docker.pkg.github.com/mwwolf/mwwolf/rust_test:1.0.0
+      credentials:
+        username: ${{ secrets.GH_PACKAGE_READ_USER }}
+        password: ${{ secrets.GH_PACKAGE_READ_TOKEN }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: Swatinem/rust-cache@v1
+      - run: scripts/lint/lint_rust.sh
+
+  rust-test:
+    runs-on: ubuntu-latest
+    container:
+      image: docker.pkg.github.com/mwwolf/mwwolf/rust_test:1.0.0
+      credentials:
+        username: ${{ secrets.GH_PACKAGE_READ_USER }}
+        password: ${{ secrets.GH_PACKAGE_READ_TOKEN }}
+    services:
+      datastore:
+        image: docker.pkg.github.com/mwwolf/mwwolf/datastore:1.0.1
+        credentials:
+          username: ${{ secrets.GH_PACKAGE_READ_USER }}
+          password: ${{ secrets.GH_PACKAGE_READ_TOKEN }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: Swatinem/rust-cache@v1
+      - run: scripts/test/test_rust.sh
+env:
+  RUSTFLAGS: "-D warnings"
+  CARGO_TERM_COLOR: always
+  WORKSPACE_ROOT: "/__w/mwwolf/mwwolf"

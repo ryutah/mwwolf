@@ -1,0 +1,20 @@
+[package]
+name = "graphql_api_client"
+version = "0.1.0"
+authors = ["ryutah <6662577+ryutah@users.noreply.github.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+serde = { version = "1.0.126", features = ["derive"] }
+graphql_client = { version = "0.9.0", features = ["web"] }
+surf = { version = "2.2.0", default-features = false, features = ["wasm-client"] }
+async-trait = "0.1.50"
+anyhow = "1.0.41"
+derive-new = "0.5.9"
+
+[dev-dependencies]
+async-std = "1.9.0"
+test-case = "1.1.0"
+wasm-bindgen-test = "0.3.0"
