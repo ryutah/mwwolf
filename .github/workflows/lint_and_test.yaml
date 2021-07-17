@@ -11,6 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: Swatinem/rust-cache@v1
+        with:
+          target-dir: ./backend/target
       - run: scripts/lint/lint_rust.sh
 
   rust-test:
@@ -34,6 +36,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: Swatinem/rust-cache@v1
+        with:
+          target-dir: ./backend/target
       - run: scripts/test/test_rust.sh
 env:
   RUSTFLAGS: "-D warnings"
