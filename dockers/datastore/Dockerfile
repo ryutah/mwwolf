@@ -4,4 +4,4 @@ RUN apk update && \
 	apk --no-cache add openjdk11-jre-headless && \
 	gcloud --quiet components install beta cloud-datastore-emulator
 
-CMD ["gcloud","beta","emulators","datastore","start","--host-port","localhost:61000","--project","test"]
+CMD ["gcloud","beta","emulators","datastore","start","--host-port","0.0.0.0:61000","--project","test"]
