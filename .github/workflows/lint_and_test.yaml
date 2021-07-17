@@ -29,6 +29,8 @@ jobs:
         credentials:
           username: ${{ secrets.GH_PACKAGE_READ_USER }}
           password: ${{ secrets.GH_PACKAGE_READ_TOKEN }}
+        ports:
+          - 61000:61000
     steps:
       - uses: actions/checkout@v2
       - uses: Swatinem/rust-cache@v1
