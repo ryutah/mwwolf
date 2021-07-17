@@ -21,7 +21,7 @@ use api::read_options::{ConsistencyType, ReadConsistency};
 pub struct Client {
     pub(crate) project_name: String,
     pub(crate) service: DatastoreClient<Channel>,
-    pub(crate) token_manager: Arc<Mutex<TokenManager>>,
+    pub(crate) token_manager: Arc<Mutex<Option<TokenManager>>>,
 }
 
 impl Client {
@@ -37,18 +37,23 @@ impl Client {
         request: T,
     ) -> Result<Request<T>, Error> {
         let mut request = request.into_request();
-        let token = self.token_manager.lock().await.token().await?;
-        let metadata = request.metadata_mut();
-        metadata.insert("authorization", token.parse().unwrap());
+        let token = self.token_manager.lock().await;
+        if token.is_some() {
+            let token = token.clone().unwrap().token().await?;
+            let metadata = request.metadata_mut();
+            metadata.insert("authorization", token.parse().unwrap());
+        }
         Ok(request)
     }
 
     pub async fn new(project_name: impl Into<String>) -> Result<Client, Error> {
-        let path = env::var("GOOGLE_APPLICATION_CREDENTIALS")?;
-        let file = File::open(path)?;
-        let creds = json::from_reader(file)?;
-
-        Client::from_credentials(project_name, creds).await
+        if let Ok(cred_file_path) = env::var("GOOGLE_APPLICATION_CREDENTIALS") {
+            let file = File::open(cred_file_path)?;
+            let creds = json::from_reader(file)?;
+            Client::from_credentials(project_name, creds).await
+        } else {
+            Client::from_without_credentials(project_name).await
+        }
     }
 
     pub async fn from_credentials(
@@ -73,10 +78,35 @@ impl Client {
         Ok(Client {
             project_name: project_name.into(),
             service: DatastoreClient::new(channel),
-            token_manager: Arc::new(Mutex::new(TokenManager::new(
+            token_manager: Arc::new(Mutex::new(Some(TokenManager::new(
                 creds,
                 Client::SCOPES.as_ref(),
-            ))),
+            )))),
+        })
+    }
+
+    pub async fn from_without_credentials(
+        project_name: impl Into<String>,
+    ) -> Result<Client, Error> {
+        let channel = if let Ok(host) = std::env::var("DATASTORE_EMULATOR_HOST") {
+            let url = format!("http://{}", host);
+            Channel::builder(http::Uri::from_str(&url).unwrap())
+                .connect()
+                .await?
+        } else {
+            let tls_config = ClientTlsConfig::new()
+                .ca_certificate(Certificate::from_pem(TLS_CERTS))
+                .domain_name(Client::DOMAIN_NAME);
+            Channel::from_static(Client::ENDPOINT)
+                .tls_config(tls_config)?
+                .connect()
+                .await?
+        };
+
+        Ok(Client {
+            project_name: project_name.into(),
+            service: DatastoreClient::new(channel),
+            token_manager: Arc::new(Mutex::new(None)),
         })
     }
 
