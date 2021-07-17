@@ -1,5 +1,5 @@
 TARGET_COMMIT_REMOTE_URL="
-git@github.com:mille-tech/project-template.git
-https://github.com/gicloud/KZ-prototype.git
+git@github.com:mwwolf/mwwolf.git
+https://github.com/mwwolf/mwwolf.git
 "
 TARGET_COMMIT_REMOTE_NAME="origin"
