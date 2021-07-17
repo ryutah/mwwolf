@@ -24,7 +24,7 @@ jobs:
         password: ${{ secrets.GH_PACKAGE_READ_TOKEN }}
       env:
         GOOGLE_CLOUD_PROJECT: mwwolf-local
-        DATASTORE_EMULATOR_HOST: "localhost:61000"
+        DATASTORE_EMULATOR_HOST: "127.0.0.1:61000"
     services:
       datastore:
         image: docker.pkg.github.com/mwwolf/mwwolf/datastore:1.0.2
