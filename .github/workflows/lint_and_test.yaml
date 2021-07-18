@@ -13,6 +13,11 @@ jobs:
       - uses: Swatinem/rust-cache@v1
         with:
           working-directory: ./backend
+          key: backend
+      - uses: Swatinem/rust-cache@v1
+        with:
+          working-directory: ./frontend
+          key: frontend
       - run: scripts/lint/lint_rust.sh
 
   rust-test:
@@ -36,6 +41,11 @@ jobs:
       - uses: Swatinem/rust-cache@v1
         with:
           working-directory: ./backend
+          key: backend
+      - uses: Swatinem/rust-cache@v1
+        with:
+          working-directory: ./frontend
+          key: frontend
       - run: scripts/test/test_rust.sh
 env:
   RUSTFLAGS: "-D warnings"
