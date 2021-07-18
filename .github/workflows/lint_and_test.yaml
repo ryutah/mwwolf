@@ -17,10 +17,6 @@ jobs:
         with:
           working-directory: ./${{ matrix.workspace }}
           key: ${{ matrix.workspace }}
-      - uses: Swatinem/rust-cache@v1
-        with:
-          working-directory: ./${{ matrix.workspace }}
-          key: ${{ matrix.workspace }}
       - run: scripts/lint/lint_rust_partial.sh ${{ matrix.workspace }}
 
   rust-test:
@@ -44,10 +40,6 @@ jobs:
           password: ${{ secrets.GH_PACKAGE_READ_TOKEN }}
     steps:
       - uses: actions/checkout@v2
-      - uses: Swatinem/rust-cache@v1
-        with:
-          working-directory: ./${{ matrix.workspace }}
-          key: ${{ matrix.workspace }}
       - uses: Swatinem/rust-cache@v1
         with:
           working-directory: ./${{ matrix.workspace }}
