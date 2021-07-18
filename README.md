@@ -1,5 +1,7 @@
 # mwwolf
 
+[![LINT_AND_TEST](https://github.com/mwwolf/mwwolf/actions/workflows/lint_and_test.yaml/badge.svg)](https://github.com/mwwolf/mwwolf/actions/workflows/lint_and_test.yaml)
+
 ## Prerequired
 
 ```

@@ -1,4 +1,4 @@
-name: CARRIAGE
+name: LINT_AND_TEST
 on: [push]
 jobs:
   rust-lint:
