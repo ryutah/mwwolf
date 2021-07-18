@@ -17,7 +17,7 @@ jobs:
         with:
           working-directory: ./${{ matrix.workspace }}
           key: ${{ matrix.workspace }}
-      - run: scripts/lint/lint_rust_partial.sh ${{ matrix.workspace }}
+      - run: scripts/lint/lint_rust_ci.sh ${{ matrix.workspace }}
 
   rust-test:
     runs-on: ubuntu-latest
